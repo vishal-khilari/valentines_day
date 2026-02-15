@@ -412,6 +412,9 @@
 
         if (currentStep < totalSteps) {
           nextStep();
+        } else if (currentStep === totalSteps) {
+          // Redirect to index.html when on the last step
+          window.location.href = "index.html";
         }
       }
 
@@ -461,6 +464,13 @@
             bgMusic.play();
           }
           nextStep();
+        } else if (
+          (e.key === " " || e.key === "ArrowRight" || e.key === "Enter") &&
+          currentStep === totalSteps
+        ) {
+          // Redirect on keyboard press when on last step
+          e.preventDefault();
+          window.location.href = "index.html";
         }
       });
     </script>
