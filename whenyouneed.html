@@ -90,7 +90,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        padding: 15px;
       }
 
       /* Main screen */
@@ -114,16 +114,16 @@
 
       .main-title {
         font-family: "Dancing Script", cursive;
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
         color: var(--deep-pink);
         animation: fadeIn 1s ease-in 0.3s both;
       }
 
       .main-subtitle {
         font-family: "Dancing Script", cursive;
-        font-size: 1.8rem;
-        margin-bottom: 3rem;
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
         color: var(--accent-pink);
         animation: fadeIn 1s ease-in 0.6s both;
       }
@@ -131,17 +131,17 @@
       .buttons-container {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.8rem;
         animation: fadeIn 1s ease-in 0.9s both;
       }
 
       .open-btn {
         background: var(--card-bg);
         border: 2px solid var(--accent-pink);
-        padding: 1.2rem 2rem;
+        padding: 1rem 1.5rem;
         border-radius: 50px;
         font-family: "Quicksand", sans-serif;
-        font-size: 1.1rem;
+        font-size: 0.95rem;
         font-weight: 500;
         color: var(--text-dark);
         cursor: pointer;
@@ -149,6 +149,7 @@
         box-shadow: 0 4px 15px rgba(255, 109, 165, 0.2);
         position: relative;
         overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .open-btn:before {
@@ -166,6 +167,10 @@
           height 0.6s;
       }
 
+      .open-btn:active {
+        transform: scale(0.98);
+      }
+
       .open-btn:hover:before {
         width: 300px;
         height: 300px;
@@ -179,7 +184,7 @@
 
       /* Hidden message */
       .hidden-message {
-        margin-top: 3rem;
+        margin-top: 2rem;
         opacity: 0;
         transition: opacity 1s ease;
         pointer-events: none;
@@ -191,7 +196,7 @@
 
       .hidden-message p {
         font-family: "Dancing Script", cursive;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         color: var(--deep-pink);
         margin: 0.5rem 0;
       }
@@ -209,7 +214,7 @@
         align-items: center;
         justify-content: center;
         z-index: 100;
-        padding: 20px;
+        padding: 15px;
       }
 
       .letter-overlay.active {
@@ -219,15 +224,15 @@
 
       .letter-card {
         background: var(--card-bg);
-        border-radius: 30px;
-        padding: 3rem 2.5rem;
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
         max-width: 500px;
         width: 100%;
         box-shadow: 0 20px 60px rgba(255, 77, 141, 0.3);
         border: 3px solid var(--accent-pink);
         position: relative;
         animation: slideIn 0.5s ease;
-        max-height: 80vh;
+        max-height: 85vh;
         overflow-y: auto;
       }
 
@@ -243,7 +248,7 @@
       }
 
       .letter-card::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
 
       .letter-card::-webkit-scrollbar-track {
@@ -258,21 +263,26 @@
 
       .close-btn {
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: 0.8rem;
+        right: 0.8rem;
         background: var(--accent-pink);
         border: none;
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         color: white;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         cursor: pointer;
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
         line-height: 1;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .close-btn:active {
+        transform: scale(0.95);
       }
 
       .close-btn:hover {
@@ -281,34 +291,39 @@
       }
 
       .letter-content {
-        font-size: 1.1rem;
-        line-height: 1.8;
+        font-size: 1rem;
+        line-height: 1.7;
         color: var(--text-dark);
       }
 
       .letter-content p {
-        margin-bottom: 1rem;
+        margin-bottom: 0.9rem;
       }
 
       .letter-title {
         font-family: "Dancing Script", cursive;
-        font-size: 2rem;
+        font-size: 1.7rem;
         color: var(--deep-pink);
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
         text-align: center;
       }
 
       /* Secret star */
       .secret-star {
         position: fixed;
-        top: 20px;
-        right: 30px;
-        font-size: 1.2rem;
+        top: 15px;
+        right: 15px;
+        font-size: 1.3rem;
         cursor: pointer;
         animation: pulse 2s ease-in-out infinite;
         z-index: 10;
         filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
         transition: transform 0.3s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .secret-star:active {
+        transform: scale(1.1);
       }
 
       .secret-star:hover {
@@ -353,15 +368,15 @@
 
       .secret-close-btn {
         position: fixed;
-        top: 1.5rem;
-        right: 1.5rem;
+        top: 1rem;
+        right: 1rem;
         background: rgba(255, 255, 255, 0.9);
         border: 2px solid white;
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         color: var(--deep-pink);
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -371,6 +386,11 @@
         line-height: 1;
         z-index: 201;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .secret-close-btn:active {
+        transform: scale(0.95);
       }
 
       .secret-close-btn:hover {
@@ -383,12 +403,13 @@
         max-width: 600px;
         text-align: center;
         color: white;
+        padding: 0 10px;
       }
 
       .secret-line {
         font-family: "Dancing Script", cursive;
-        font-size: 2rem;
-        margin: 1.5rem 0;
+        font-size: 1.5rem;
+        margin: 1.2rem 0;
         opacity: 0;
         transform: translateY(20px);
       }
@@ -418,7 +439,7 @@
 
       .burst-heart {
         position: absolute;
-        font-size: 2rem;
+        font-size: 1.5rem;
         animation: burstOut 2s ease-out forwards;
       }
 
@@ -432,96 +453,111 @@
         }
       }
 
-      /* Music toggle */
-      .music-toggle {
-        margin-top: 3rem;
-        background: rgba(255, 255, 255, 0.3);
-        border: 2px solid white;
-        padding: 0.8rem 1.5rem;
-        border-radius: 50px;
-        color: white;
-        font-family: "Quicksand", sans-serif;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        opacity: 0;
-      }
-
-      .music-toggle.show {
-        animation: fadeIn 1s ease forwards;
-      }
-
-      .music-toggle:hover {
-        background: rgba(255, 255, 255, 0.5);
-        transform: scale(1.05);
-      }
-
-      /* Responsive */
-      @media (max-width: 600px) {
+      /* Responsive adjustments for smaller screens */
+      @media (max-width: 400px) {
         .main-title {
-          font-size: 2rem;
+          font-size: 1.5rem;
         }
 
         .main-subtitle {
-          font-size: 1.5rem;
+          font-size: 1.2rem;
         }
 
         .open-btn {
-          font-size: 1rem;
-          padding: 1rem 1.5rem;
+          font-size: 0.9rem;
+          padding: 0.9rem 1.2rem;
         }
 
         .letter-card {
-          padding: 2rem 1.5rem;
+          padding: 1.8rem 1.2rem;
+          border-radius: 15px;
+        }
+
+        .letter-title {
+          font-size: 1.5rem;
+        }
+
+        .letter-content {
+          font-size: 0.95rem;
         }
 
         .secret-line {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
+          margin: 1rem 0;
         }
 
         .secret-star {
-          top: 15px;
-          right: 20px;
-          font-size: 1rem;
+          top: 12px;
+          right: 12px;
+          font-size: 1.1rem;
         }
 
-        .secret-close-btn {
-          top: 1rem;
-          right: 1rem;
-          width: 40px;
-          height: 40px;
-          font-size: 1.5rem;
+        .hidden-message p {
+          font-size: 1.1rem;
         }
       }
 
-      /* Typewriter effect */
-      .typewriter {
-        overflow: hidden;
-        border-right: 2px solid var(--text-dark);
-        white-space: nowrap;
-        animation:
-          typing 3s steps(40, end),
-          blink-caret 0.75s step-end infinite;
-        display: inline-block;
+      /* Landscape mode adjustments */
+      @media (max-height: 600px) and (orientation: landscape) {
+        .container {
+          padding: 10px;
+        }
+
+        .main-title {
+          font-size: 1.4rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .main-subtitle {
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+        }
+
+        .buttons-container {
+          gap: 0.6rem;
+        }
+
+        .open-btn {
+          padding: 0.7rem 1.2rem;
+          font-size: 0.85rem;
+        }
+
+        .letter-card {
+          max-height: 90vh;
+          padding: 1.5rem 1.2rem;
+        }
+
+        .secret-line {
+          font-size: 1.2rem;
+          margin: 0.8rem 0;
+        }
       }
 
-      @keyframes typing {
-        from {
-          width: 0;
+      /* iPhone SE and similar small screens */
+      @media (max-width: 375px) {
+        .main-title {
+          font-size: 1.4rem;
         }
-        to {
-          width: 100%;
+
+        .main-subtitle {
+          font-size: 1.1rem;
+        }
+
+        .open-btn {
+          font-size: 0.85rem;
+          padding: 0.85rem 1rem;
         }
       }
 
-      @keyframes blink-caret {
-        from,
-        to {
-          border-color: transparent;
-        }
-        50% {
-          border-color: var(--text-dark);
-        }
+      /* Prevent text selection on buttons */
+      .open-btn,
+      .close-btn,
+      .secret-star,
+      .secret-close-btn {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
     </style>
   </head>
@@ -580,22 +616,11 @@
         <div class="secret-line">And that's exactly why I fell for you.</div>
         <div class="secret-line">You don't just see… you notice.</div>
         <div class="secret-line">And now… you officially own my heart.</div>
-        <button class="music-toggle" id="musicToggle">
-          🎵 Play soft music
-        </button>
       </div>
     </div>
 
     <!-- Heart burst container -->
     <div class="heart-burst" id="heartBurst"></div>
-
-    <!-- Audio element -->
-    <audio id="bgMusic" loop>
-      <source
-        src="data:audio/wav;base64,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"
-        type="audio/wav"
-      />
-    </audio>
 
     <script>
       // Telegram configuration
@@ -680,29 +705,29 @@
                     <p>I miss our late-night talks, your random thoughts, and the way your messages instantly make my day better.</p>
                     <p>Distance is hard. Waiting is hard. But loving you has never felt forced.</p>
                     <p>Every day apart just reminds me how special this is. How rare it is to find someone who feels like home, even through a screen.</p>
-                    <p>If you feel a little warmth right now, that’s me thinking about you. That’s me loving you quietly from miles away.</p>
-                    <p>We may not have met yet, but what we have is real. And one day, we won’t need screens between us.</p>
-                    <p>And when that day comes, I’m going to hug you like I’ve been saving it for all this time.</p>
-                    <p>Until then, you’re in my heart. Every single second. ❤️</p>
+                    <p>If you feel a little warmth right now, that's me thinking about you. That's me loving you quietly from miles away.</p>
+                    <p>We may not have met yet, but what we have is real. And one day, we won't need screens between us.</p>
+                    <p>And when that day comes, I'm going to hug you like I've been saving it for all this time.</p>
+                    <p>Until then, you're in my heart. Every single second. ❤️</p>
 
                 `,
         },
         sleep: {
           title: "When you can't sleep 🌙",
           content: `
-                <p>Hey… if you’re still awake right now,</p>
+                <p>Hey… if you're still awake right now,</p>
 
-                <p>Maybe your mind is busy. Maybe it’s just one of those random nights where sleep doesn’t come easily. Either way, it’s okay.</p>
+                <p>Maybe your mind is busy. Maybe it's just one of those random nights where sleep doesn't come easily. Either way, it's okay.</p>
 
-                <p>You don’t have to figure everything out tonight. Nothing at this hour is as urgent as it feels.</p>
+                <p>You don't have to figure everything out tonight. Nothing at this hour is as urgent as it feels.</p>
 
-                <p>If I’m asleep already, just imagine I left this here for you, like a small note waiting by your pillow.</p>
+                <p>If I'm asleep already, just imagine I left this here for you, like a small note waiting by your pillow.</p>
 
-                <p>I might be on a different sleep schedule sometimes, but that doesn’t change how much I care.</p>
+                <p>I might be on a different sleep schedule sometimes, but that doesn't change how much I care.</p>
 
-                <p>Take one slow breath. Let your shoulders relax a little. You’ve done enough for today.</p>
+                <p>Take one slow breath. Let your shoulders relax a little. You've done enough for today.</p>
 
-                <p>Whenever sleep decides to come, let it. And when you wake up, I’ll be there, maybe with a good morning text, maybe still half asleep, but still yours.</p>
+                <p>Whenever sleep decides to come, let it. And when you wake up, I'll be there, maybe with a good morning text, maybe still half asleep, but still yours.</p>
 
                 <p>Now close your eyes. Rest a little. 🌙</p>
 
@@ -826,11 +851,10 @@
           setTimeout(() => {
             line.classList.add("show");
 
-            // After last line, show heart burst and music toggle
+            // After last line, show heart burst
             if (index === lines.length - 1) {
               setTimeout(() => {
                 createHeartBurst();
-                document.getElementById("musicToggle").classList.add("show");
               }, 1000);
             }
           }, index * 2000);
@@ -843,7 +867,6 @@
         // Reset all animations
         const lines = secretContent.querySelectorAll(".secret-line");
         lines.forEach((line) => line.classList.remove("show"));
-        document.getElementById("musicToggle").classList.remove("show");
       });
 
       // Close secret overlay when clicking outside
@@ -853,7 +876,6 @@
           // Reset all animations
           const lines = secretContent.querySelectorAll(".secret-line");
           lines.forEach((line) => line.classList.remove("show"));
-          document.getElementById("musicToggle").classList.remove("show");
         }
       });
 
@@ -884,22 +906,6 @@
           heartBurst.innerHTML = "";
         }, 2500);
       }
-
-      // Music toggle
-      const bgMusic = document.getElementById("bgMusic");
-      const musicToggle = document.getElementById("musicToggle");
-      let isPlaying = false;
-
-      musicToggle.addEventListener("click", () => {
-        if (isPlaying) {
-          bgMusic.pause();
-          musicToggle.textContent = "🎵 Play soft music";
-        } else {
-          bgMusic.play();
-          musicToggle.textContent = "🔇 Pause music";
-        }
-        isPlaying = !isPlaying;
-      });
 
       // Prevent context menu on secret star
       secretStar.addEventListener("contextmenu", (e) => e.preventDefault());
