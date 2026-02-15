@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You ❤️</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+      }
+
+      :root {
+        --bg-pink: #ffd6e8;
+        --accent-pink: #ff6fa5;
+        --deep-pink: #ff4d8d;
+        --text-dark: #5a3a4a;
+        --card-bg: #ffffff;
+        --glow: rgba(255, 109, 165, 0.4);
+      }
+
+      body {
+        font-family: "Quicksand", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #ffd6e8 0%,
+          #ffe4f0 50%,
+          #ffd6e8 100%
+        );
+        min-height: 100vh;
+        color: var(--text-dark);
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Floating hearts background */
+      .hearts-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .floating-heart {
+        position: absolute;
+        font-size: 12px;
+        opacity: 0.15;
+        animation: float-up linear infinite;
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.15;
+        }
+        90% {
+          opacity: 0.15;
+        }
+        100% {
+          transform: translateY(-100px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Main container */
+      .container {
+        position: relative;
+        z-index: 1;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      /* Main screen */
+      .main-screen {
+        text-align: center;
+        max-width: 600px;
+        width: 100%;
+        animation: fadeIn 1s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .main-title {
+        font-family: "Dancing Script", cursive;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--deep-pink);
+        animation: fadeIn 1s ease-in 0.3s both;
+      }
+
+      .main-subtitle {
+        font-family: "Dancing Script", cursive;
+        font-size: 1.8rem;
+        margin-bottom: 3rem;
+        color: var(--accent-pink);
+        animation: fadeIn 1s ease-in 0.6s both;
+      }
+
+      .buttons-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        animation: fadeIn 1s ease-in 0.9s both;
+      }
+
+      .open-btn {
+        background: var(--card-bg);
+        border: 2px solid var(--accent-pink);
+        padding: 1.2rem 2rem;
+        border-radius: 50px;
+        font-family: "Quicksand", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--text-dark);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 109, 165, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .open-btn:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 109, 165, 0.1);
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.6s,
+          height 0.6s;
+      }
+
+      .open-btn:hover:before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .open-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px var(--glow);
+        border-color: var(--deep-pink);
+      }
+
+      /* Hidden message */
+      .hidden-message {
+        margin-top: 3rem;
+        opacity: 0;
+        transition: opacity 1s ease;
+        pointer-events: none;
+      }
+
+      .hidden-message.show {
+        opacity: 1;
+      }
+
+      .hidden-message p {
+        font-family: "Dancing Script", cursive;
+        font-size: 1.4rem;
+        color: var(--deep-pink);
+        margin: 0.5rem 0;
+      }
+
+      /* Letter card overlay */
+      .letter-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        padding: 20px;
+      }
+
+      .letter-overlay.active {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .letter-card {
+        background: var(--card-bg);
+        border-radius: 30px;
+        padding: 3rem 2.5rem;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 20px 60px rgba(255, 77, 141, 0.3);
+        border: 3px solid var(--accent-pink);
+        position: relative;
+        animation: slideIn 0.5s ease;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8) translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .letter-card::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .letter-card::-webkit-scrollbar-track {
+        background: #ffe4f0;
+        border-radius: 10px;
+      }
+
+      .letter-card::-webkit-scrollbar-thumb {
+        background: var(--accent-pink);
+        border-radius: 10px;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--accent-pink);
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      .close-btn:hover {
+        background: var(--deep-pink);
+        transform: rotate(90deg);
+      }
+
+      .letter-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-dark);
+      }
+
+      .letter-content p {
+        margin-bottom: 1rem;
+      }
+
+      .letter-title {
+        font-family: "Dancing Script", cursive;
+        font-size: 2rem;
+        color: var(--deep-pink);
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      /* Secret star */
+      .secret-star {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        animation: pulse 2s ease-in-out infinite;
+        z-index: 10;
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+        transition: transform 0.3s ease;
+      }
+
+      .secret-star:hover {
+        transform: scale(1.3);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.6;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.15);
+        }
+      }
+
+      /* Secret reveal */
+      .secret-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 77, 141, 0.95) 0%,
+          rgba(255, 109, 165, 0.95) 100%
+        );
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        padding: 20px;
+      }
+
+      .secret-overlay.active {
+        display: flex;
+        animation: fadeIn 0.8s ease;
+      }
+
+      .secret-close-btn {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        color: var(--deep-pink);
+        font-size: 1.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        z-index: 201;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .secret-close-btn:hover {
+        background: white;
+        transform: rotate(90deg) scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .secret-content {
+        max-width: 600px;
+        text-align: center;
+        color: white;
+      }
+
+      .secret-line {
+        font-family: "Dancing Script", cursive;
+        font-size: 2rem;
+        margin: 1.5rem 0;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .secret-line.show {
+        animation: revealLine 1s ease forwards;
+      }
+
+      @keyframes revealLine {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .heart-burst {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      }
+
+      .heart-burst.active {
+        display: block;
+      }
+
+      .burst-heart {
+        position: absolute;
+        font-size: 2rem;
+        animation: burstOut 2s ease-out forwards;
+      }
+
+      @keyframes burstOut {
+        0% {
+          transform: translate(0, 0) scale(0);
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      /* Music toggle */
+      .music-toggle {
+        margin-top: 3rem;
+        background: rgba(255, 255, 255, 0.3);
+        border: 2px solid white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        color: white;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        opacity: 0;
+      }
+
+      .music-toggle.show {
+        animation: fadeIn 1s ease forwards;
+      }
+
+      .music-toggle:hover {
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(1.05);
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .main-title {
+          font-size: 2rem;
+        }
+
+        .main-subtitle {
+          font-size: 1.5rem;
+        }
+
+        .open-btn {
+          font-size: 1rem;
+          padding: 1rem 1.5rem;
+        }
+
+        .letter-card {
+          padding: 2rem 1.5rem;
+        }
+
+        .secret-line {
+          font-size: 1.5rem;
+        }
+
+        .secret-star {
+          top: 15px;
+          right: 20px;
+          font-size: 1rem;
+        }
+
+        .secret-close-btn {
+          top: 1rem;
+          right: 1rem;
+          width: 40px;
+          height: 40px;
+          font-size: 1.5rem;
+        }
+      }
+
+      /* Typewriter effect */
+      .typewriter {
+        overflow: hidden;
+        border-right: 2px solid var(--text-dark);
+        white-space: nowrap;
+        animation:
+          typing 3s steps(40, end),
+          blink-caret 0.75s step-end infinite;
+        display: inline-block;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: var(--text-dark);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating hearts background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Secret star -->
+    <div class="secret-star" id="secretStar">⭐</div>
+
+    <!-- Main container -->
+    <div class="container">
+      <div class="main-screen" id="mainScreen">
+        <h1 class="main-title">I made something for you…</h1>
+        <h2 class="main-subtitle">Open when you need me ❤️</h2>
+
+        <div class="buttons-container">
+          <button class="open-btn" data-letter="sad">
+            😕 Open when you're sad
+          </button>
+          <button class="open-btn" data-letter="mad">
+            😡 Open when you're mad at me
+          </button>
+          <button class="open-btn" data-letter="miss">
+            🥺 Open when you miss me
+          </button>
+          <button class="open-btn" data-letter="sleep">
+            🌙 Open when you can't sleep
+          </button>
+          <button class="open-btn" data-letter="doubt">
+            ❤️ Open when you doubt my love
+          </button>
+        </div>
+
+        <div class="hidden-message" id="hiddenMessage">
+          <p>You don't need a button to open my heart.</p>
+          <p>It's already yours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter overlay -->
+    <div class="letter-overlay" id="letterOverlay">
+      <div class="letter-card">
+        <button class="close-btn" id="closeBtn">×</button>
+        <div id="letterContent"></div>
+      </div>
+    </div>
+
+    <!-- Secret overlay -->
+    <div class="secret-overlay" id="secretOverlay">
+      <button class="secret-close-btn" id="secretCloseBtn">×</button>
+      <div class="secret-content" id="secretContent">
+        <div class="secret-line">If you found this…</div>
+        <div class="secret-line">It means you notice the little things.</div>
+        <div class="secret-line">And that's exactly why I fell for you.</div>
+        <div class="secret-line">You don't just see… you notice.</div>
+        <div class="secret-line">And now… you officially own my heart.</div>
+        <button class="music-toggle" id="musicToggle">
+          🎵 Play soft music
+        </button>
+      </div>
+    </div>
+
+    <!-- Heart burst container -->
+    <div class="heart-burst" id="heartBurst"></div>
+
+    <!-- Audio element -->
+    <audio id="bgMusic" loop>
+      <source
+        src="data:audio/wav;base64,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"
+        type="audio/wav"
+      />
+    </audio>
+
+    <script>
+      // Telegram configuration
+      const TELEGRAM_BOT_TOKEN =
+        "8033918028:AAEAhNEBsm05eY08_2T0KpVA5uvPw941uHw";
+      const TELEGRAM_CHAT_ID = "6220286036";
+
+      // Function to send Telegram notification
+      async function sendTelegramNotification(letterType, letterTitle) {
+        const now = new Date();
+        const timeString = now.toLocaleString("en-US", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        });
+
+        const messages = {
+          sad: "💙 She opened 'When you're sad'",
+          mad: "😔 She opened 'When you're mad at me'",
+          miss: "🥺 She opened 'When you miss me'",
+          sleep: "🌙 She opened 'When you can't sleep'",
+          doubt: "❤️ She opened 'When you doubt my love'",
+        };
+
+        const message = `${messages[letterType]}\n⏰ ${timeString}\n\n💕 She needed you right now.`;
+
+        try {
+          const response = await fetch(
+            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: "HTML",
+              }),
+            },
+          );
+
+          if (response.ok) {
+            console.log("Notification sent successfully");
+          } else {
+            console.error("Failed to send notification");
+          }
+        } catch (error) {
+          console.error("Error sending notification:", error);
+        }
+      }
+
+      // Letters content
+      const letters = {
+        sad: {
+          title: "When you're sad 💙",
+          content: `
+                    <p>Hey you,</p>
+                    <p>I know sometimes the world feels heavy. I know there are days when even smiling feels like work. But I need you to know something important...</p>
+                    <p>Your sadness doesn't make you any less beautiful to me. Your tears don't make you weak. They make you human, and they make you real.</p>
+                    <p>I'm here. Not to fix everything, not to tell you "don't cry," but just to be here. To hold space for whatever you're feeling.</p>
+                    <p>You don't have to be okay right now. You just have to be you. And you being you is more than enough.</p>
+                    <p>This feeling? It's temporary.</p>
+                    <p>I love you on your bright days and your dark days equally. ❤️</p>
+                `,
+        },
+        mad: {
+          title: "When you're mad at me 😔",
+          content: `
+                    <p>I know I messed up.</p>
+                    <p>I can't see your face right now, but I can feel it. And it hurts knowing I caused you pain or frustration.</p>
+                    <p>I'm not perfect. I'm going to make mistakes. But what I promise you is this: I will always try to do better. I will always listen. I will always care about how you feel.</p>
+                    <p>Your feelings are valid. Always. Even when I don't understand them right away, even when they're about me.</p>
+                    <p>I'm sorry for whatever I did. And I mean that. Not because I want this to blow over, but because I genuinely hate knowing I hurt you.</p>
+                    <p>Can we talk about it? I want to understand. I want to make this right.</p>
+                    <p>I love you, even when you're mad at me. Especially then. ❤️</p>
+                `,
+        },
+        miss: {
+          title: "When you miss me 🥺",
+          content: `
+                    <p>I miss you too.</p>
+                    <p>I miss our late-night talks, your random thoughts, and the way your messages instantly make my day better.</p>
+                    <p>Distance is hard. Waiting is hard. But loving you has never felt forced.</p>
+                    <p>Every day apart just reminds me how special this is. How rare it is to find someone who feels like home, even through a screen.</p>
+                    <p>If you feel a little warmth right now, that’s me thinking about you. That’s me loving you quietly from miles away.</p>
+                    <p>We may not have met yet, but what we have is real. And one day, we won’t need screens between us.</p>
+                    <p>And when that day comes, I’m going to hug you like I’ve been saving it for all this time.</p>
+                    <p>Until then, you’re in my heart. Every single second. ❤️</p>
+
+                `,
+        },
+        sleep: {
+          title: "When you can't sleep 🌙",
+          content: `
+                <p>Hey… if you’re still awake right now,</p>
+
+                <p>Maybe your mind is busy. Maybe it’s just one of those random nights where sleep doesn’t come easily. Either way, it’s okay.</p>
+
+                <p>You don’t have to figure everything out tonight. Nothing at this hour is as urgent as it feels.</p>
+
+                <p>If I’m asleep already, just imagine I left this here for you, like a small note waiting by your pillow.</p>
+
+                <p>I might be on a different sleep schedule sometimes, but that doesn’t change how much I care.</p>
+
+                <p>Take one slow breath. Let your shoulders relax a little. You’ve done enough for today.</p>
+
+                <p>Whenever sleep decides to come, let it. And when you wake up, I’ll be there, maybe with a good morning text, maybe still half asleep, but still yours.</p>
+
+                <p>Now close your eyes. Rest a little. 🌙</p>
+
+                `,
+        },
+        doubt: {
+          title: "When you doubt my love ❤️",
+          content: `
+                    <p>Listen to me very carefully...</p>
+                    <p>I. Love. You.</p>
+                    <p>Not because of what you do for me. Not because you're perfect (you're not, and neither am I). Not because it's convenient or easy.</p>
+                    <p>I love you because you're YOU. Because your soul speaks to mine in ways I can't even explain.</p>
+                    <p>On days when you feel like you're too much or not enough, I need you to remember: You are exactly the right amount of everything I've ever wanted.</p>
+                    <p>My love isn't conditional. It doesn't waver with your mood, your appearance, your productivity, or your mistakes.</p>
+                    <p>You could push me away a thousand times, and I'd still choose you.</p>
+                    <p>So please, don't doubt this. Don't doubt us. Don't doubt that you are cherished beyond measure.</p>
+                    <p>You are my person. And I am yours. ❤️</p>
+                `,
+        },
+      };
+
+      // Create floating hearts
+      const heartsContainer = document.getElementById("heartsContainer");
+      function createFloatingHeart() {
+        const heart = document.createElement("div");
+        heart.className = "floating-heart";
+        heart.textContent = "❤️";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDuration = Math.random() * 10 + 15 + "s";
+        heart.style.fontSize = Math.random() * 8 + 8 + "px";
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 25000);
+      }
+
+      // Create hearts periodically
+      setInterval(createFloatingHeart, 800);
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createFloatingHeart, i * 500);
+      }
+
+      // Track opened letters
+      let openedLetters = new Set();
+
+      // Open letter functionality
+      const letterOverlay = document.getElementById("letterOverlay");
+      const letterContent = document.getElementById("letterContent");
+      const closeBtn = document.getElementById("closeBtn");
+      const hiddenMessage = document.getElementById("hiddenMessage");
+
+      document.querySelectorAll(".open-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const letterType = this.getAttribute("data-letter");
+          const letter = letters[letterType];
+
+          // Send Telegram notification
+          sendTelegramNotification(letterType, letter.title);
+
+          openedLetters.add(letterType);
+
+          letterContent.innerHTML = `
+                    <h2 class="letter-title">${letter.title}</h2>
+                    <div class="letter-content">${letter.content}</div>
+                `;
+
+          letterOverlay.classList.add("active");
+
+          // Show hidden message after 3 letters
+          if (openedLetters.size >= 3) {
+            hiddenMessage.classList.add("show");
+          }
+        });
+      });
+
+      closeBtn.addEventListener("click", () => {
+        letterOverlay.classList.remove("active");
+      });
+
+      letterOverlay.addEventListener("click", (e) => {
+        if (e.target === letterOverlay) {
+          letterOverlay.classList.remove("active");
+        }
+      });
+
+      // Secret star functionality
+      const secretStar = document.getElementById("secretStar");
+      const secretOverlay = document.getElementById("secretOverlay");
+      const secretContent = document.getElementById("secretContent");
+      const heartBurst = document.getElementById("heartBurst");
+      const secretCloseBtn = document.getElementById("secretCloseBtn");
+
+      secretStar.addEventListener("click", () => {
+        // Send special notification for finding the secret
+        const now = new Date();
+        const timeString = now.toLocaleString("en-US", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        });
+
+        const secretMessage = `⭐ SHE FOUND THE SECRET STAR! ⭐\n⏰ ${timeString}\n\n✨ She notices the little things.\n💝 That's why you fell for her.`;
+
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: secretMessage,
+            parse_mode: "HTML",
+          }),
+        }).catch((error) =>
+          console.error("Error sending secret notification:", error),
+        );
+
+        secretOverlay.classList.add("active");
+
+        // Reveal lines one by one
+        const lines = secretContent.querySelectorAll(".secret-line");
+        lines.forEach((line, index) => {
+          setTimeout(() => {
+            line.classList.add("show");
+
+            // After last line, show heart burst and music toggle
+            if (index === lines.length - 1) {
+              setTimeout(() => {
+                createHeartBurst();
+                document.getElementById("musicToggle").classList.add("show");
+              }, 1000);
+            }
+          }, index * 2000);
+        });
+      });
+
+      // Close secret overlay
+      secretCloseBtn.addEventListener("click", () => {
+        secretOverlay.classList.remove("active");
+        // Reset all animations
+        const lines = secretContent.querySelectorAll(".secret-line");
+        lines.forEach((line) => line.classList.remove("show"));
+        document.getElementById("musicToggle").classList.remove("show");
+      });
+
+      // Close secret overlay when clicking outside
+      secretOverlay.addEventListener("click", (e) => {
+        if (e.target === secretOverlay) {
+          secretOverlay.classList.remove("active");
+          // Reset all animations
+          const lines = secretContent.querySelectorAll(".secret-line");
+          lines.forEach((line) => line.classList.remove("show"));
+          document.getElementById("musicToggle").classList.remove("show");
+        }
+      });
+
+      // Heart burst animation
+      function createHeartBurst() {
+        heartBurst.classList.add("active");
+        const heartCount = 20;
+        const radius = 150;
+
+        for (let i = 0; i < heartCount; i++) {
+          const heart = document.createElement("div");
+          heart.className = "burst-heart";
+          heart.textContent = "❤️";
+
+          const angle = (i / heartCount) * Math.PI * 2;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+
+          heart.style.setProperty("--x", x + "px");
+          heart.style.setProperty("--y", y + "px");
+          heart.style.transform = `translate(${x}px, ${y}px) scale(0)`;
+
+          heartBurst.appendChild(heart);
+        }
+
+        setTimeout(() => {
+          heartBurst.classList.remove("active");
+          heartBurst.innerHTML = "";
+        }, 2500);
+      }
+
+      // Music toggle
+      const bgMusic = document.getElementById("bgMusic");
+      const musicToggle = document.getElementById("musicToggle");
+      let isPlaying = false;
+
+      musicToggle.addEventListener("click", () => {
+        if (isPlaying) {
+          bgMusic.pause();
+          musicToggle.textContent = "🎵 Play soft music";
+        } else {
+          bgMusic.play();
+          musicToggle.textContent = "🔇 Pause music";
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // Prevent context menu on secret star
+      secretStar.addEventListener("contextmenu", (e) => e.preventDefault());
+    </script>
+  </body>
+</html>

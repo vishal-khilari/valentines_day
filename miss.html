@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Much I Miss You 🥺</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --pink-light: #ffd6e8;
+        --pink-lighter: #ffe4f0;
+        --pink-accent: #ff9ec7;
+        --white: #ffffff;
+        --text-dark: #ff4d8d;
+        --text-soft: #7a7a7a;
+        --shadow: rgba(255, 158, 199, 0.3);
+      }
+
+      body {
+        font-family: "Quicksand", sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--pink-light) 0%,
+          var(--pink-lighter) 100%
+        );
+        color: var(--text-dark);
+        overflow: hidden;
+        cursor: pointer;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      /* ========== FLOATING HEARTS ANIMATION ========== */
+      .floating-hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 12px;
+        opacity: 0;
+        animation: float-up 15s infinite ease-in-out;
+        color: rgba(255, 158, 199, 0.4);
+      }
+
+      .heart:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 18s;
+      }
+      .heart:nth-child(2) {
+        left: 25%;
+        animation-delay: 3s;
+        animation-duration: 15s;
+      }
+      .heart:nth-child(3) {
+        left: 40%;
+        animation-delay: 6s;
+        animation-duration: 20s;
+      }
+      .heart:nth-child(4) {
+        left: 55%;
+        animation-delay: 2s;
+        animation-duration: 17s;
+      }
+      .heart:nth-child(5) {
+        left: 70%;
+        animation-delay: 8s;
+        animation-duration: 16s;
+      }
+      .heart:nth-child(6) {
+        left: 85%;
+        animation-delay: 4s;
+        animation-duration: 19s;
+      }
+      .heart:nth-child(7) {
+        left: 15%;
+        animation-delay: 10s;
+        animation-duration: 21s;
+      }
+      .heart:nth-child(8) {
+        left: 60%;
+        animation-delay: 12s;
+        animation-duration: 14s;
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(100vh) scale(0.8) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translateY(-100px) scale(1.2) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* ========== BACK BUTTON ========== */
+      .back-button {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        background: var(--white);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 600;
+        color: var(--text-dark);
+        box-shadow: 0 4px 15px var(--shadow);
+        transition: all 0.3s ease;
+        z-index: 100;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .back-button:hover {
+        transform: translateX(-5px);
+        box-shadow: 0 6px 20px var(--shadow);
+      }
+
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .step {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        width: 90%;
+        max-width: 700px;
+      }
+
+      .step.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .step.exiting {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+      }
+
+      .step.entering {
+        transform: translate(-50%, -50%) scale(1.04);
+      }
+
+      /* Text step styling */
+      .step-text {
+        padding: 2rem;
+      }
+
+      .step-text h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 600;
+        line-height: 1.4;
+        letter-spacing: 0.02em;
+        color: var(--text-dark);
+        text-shadow: 0 2px 10px var(--shadow);
+      }
+
+      .step-text p {
+        font-family: "Quicksand", sans-serif;
+        font-size: clamp(1.25rem, 3vw, 2rem);
+        font-weight: 500;
+        line-height: 1.6;
+        letter-spacing: 0.01em;
+        color: var(--text-dark);
+        text-shadow: 0 2px 10px var(--shadow);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Image step styling */
+      .step-image img {
+        max-width: 100%;
+        max-height: 80vh;
+        height: auto;
+        width: auto;
+        border-radius: 20px;
+        box-shadow:
+          0 10px 40px var(--shadow),
+          0 5px 20px rgba(255, 158, 199, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      /* Tap hint indicator */
+      .tap-hint {
+        position: fixed;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.9rem;
+        font-family: "Quicksand", sans-serif;
+        color: var(--text-soft);
+        letter-spacing: 0.05em;
+        font-weight: 500;
+        opacity: 0.7;
+        animation: fadeInOut 3s ease-in-out infinite;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      @keyframes fadeInOut {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      /* Hide tap hint on last step */
+      body.on-last-step .tap-hint {
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s ease;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .step-text h1 {
+          font-size: clamp(1.75rem, 6vw, 3rem);
+        }
+
+        .step-image img {
+          border-radius: 16px;
+          max-height: 75vh;
+        }
+
+        .tap-hint {
+          bottom: 2rem;
+          font-size: 0.8rem;
+        }
+
+        .back-button {
+          top: 20px;
+          left: 20px;
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .step-image img {
+          border-radius: 12px;
+          max-height: 70vh;
+        }
+
+        .step-text h1 {
+          font-size: clamp(1.5rem, 6vw, 2.5rem);
+        }
+
+        .step-text p {
+          font-size: clamp(1rem, 4vw, 1.5rem);
+        }
+      }
+
+      /* Disable cursor pointer on last step */
+      body.on-last-step {
+        cursor: default;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts">
+      <div class="heart">❤</div>
+      <div class="heart">💕</div>
+      <div class="heart">💖</div>
+      <div class="heart">💗</div>
+      <div class="heart">💓</div>
+      <div class="heart">💝</div>
+      <div class="heart">❤</div>
+      <div class="heart">💕</div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" autoplay loop>
+      <source src="video/MissYou.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">← Back</a>
+
+    <div class="container">
+      <!-- Step 1: Opening text -->
+      <div class="step step-text active" data-step="1">
+        <h1>This is how much I miss you…</h1>
+      </div>
+
+      <!-- Step 2: First image (littlebit) -->
+      <div class="step step-image" data-step="2">
+        <img src="video/littlebit.jpg" alt="I miss you a little bit" />
+      </div>
+
+      <!-- Step 3: Second image (fingers) -->
+      <div class="step step-image" data-step="3">
+        <img src="video/fingers.jpg" alt="Just this much" />
+      </div>
+
+      <!-- Step 4: Third image (zoomed) -->
+      <div class="step step-image" data-step="4">
+        <img src="video/zoomed.jpg" alt="How much I miss you" />
+      </div>
+
+      <!-- Step 5: Fourth image (galaxy) -->
+      <div class="step step-image" data-step="5">
+        <img src="video/galaxy.jpg" alt="A universe of missing you" />
+      </div>
+
+      <!-- Step 6: Final message -->
+      <div class="step step-text" data-step="6">
+        <p>
+          It was a silly way to show how much I miss you, but yeah… I really do
+          miss you so much 😘
+        </p>
+      </div>
+    </div>
+
+    <div class="tap-hint">tap anywhere to continue</div>
+
+    <script>
+      let currentStep = 1;
+      const totalSteps = 6;
+      const bgMusic = document.getElementById("bgMusic");
+
+      // Force play music immediately on page load
+      window.addEventListener("DOMContentLoaded", () => {
+        bgMusic.play().catch((e) => {
+          console.log(
+            "Auto-play prevented by browser. User interaction required.",
+          );
+        });
+      });
+
+      // Also try on window load
+      window.addEventListener("load", () => {
+        bgMusic.play().catch((e) => {
+          console.log("Auto-play prevented by browser.");
+        });
+
+        // Preload images for smoother transitions
+        const imagePaths = [
+          "video/littlebit.jpg",
+          "video/fingers.jpg",
+          "video/zoomed.jpg",
+          "video/galaxy.jpg",
+        ];
+
+        imagePaths.forEach((path) => {
+          const img = new Image();
+          img.src = path;
+        });
+      });
+
+      // Handle click/tap anywhere on the page
+      document.body.addEventListener("click", handleInteraction);
+
+      // Handle touch events for better mobile experience
+      document.body.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        handleInteraction();
+      });
+
+      function handleInteraction() {
+        // Ensure music is playing if it was blocked
+        if (bgMusic.paused) {
+          bgMusic.play();
+        }
+
+        if (currentStep < totalSteps) {
+          nextStep();
+        }
+      }
+
+      function nextStep() {
+        const currentElement = document.querySelector(
+          `[data-step="${currentStep}"]`,
+        );
+        const nextElement = document.querySelector(
+          `[data-step="${currentStep + 1}"]`,
+        );
+
+        if (currentElement && nextElement) {
+          // Exit current step
+          currentElement.classList.add("exiting");
+          currentElement.classList.remove("active");
+
+          // Remove exiting class after transition
+          setTimeout(() => {
+            currentElement.classList.remove("exiting");
+          }, 700);
+
+          // Enter next step with slight delay for smooth effect
+          nextElement.classList.add("entering");
+          setTimeout(() => {
+            nextElement.classList.add("active");
+            nextElement.classList.remove("entering");
+          }, 50);
+
+          currentStep++;
+
+          // On last step, hide tap hint and change cursor
+          if (currentStep === totalSteps) {
+            document.body.classList.add("on-last-step");
+          }
+        }
+      }
+
+      // Optional: Keyboard navigation support
+      document.addEventListener("keydown", (e) => {
+        if (
+          (e.key === " " || e.key === "ArrowRight" || e.key === "Enter") &&
+          currentStep < totalSteps
+        ) {
+          e.preventDefault();
+          // Ensure music is playing
+          if (bgMusic.paused) {
+            bgMusic.play();
+          }
+          nextStep();
+        }
+      });
+    </script>
+  </body>
+</html>
