@@ -164,57 +164,58 @@
 
       .main-title {
         font-family: "Dancing Script", cursive;
-        font-size: 3rem;
+        font-size: 2.5rem;
         color: var(--text-dark);
         margin-bottom: 15px;
         animation: fade-in 1.2s ease-out;
+        padding: 0 10px;
       }
 
       .main-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: var(--text-soft);
-        margin-bottom: 50px;
+        margin-bottom: 40px;
         font-weight: 500;
         animation: fade-in 1.4s ease-out;
+        padding: 0 10px;
       }
 
       /* ========== CARD BUTTONS ========== */
       .card-container {
         display: flex;
-        flex-wrap: wrap;
-        gap: 25px;
-        justify-content: center;
-        max-width: 900px;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        max-width: 400px;
       }
 
       .card-button {
         background: var(--white);
         border: none;
-        border-radius: 25px;
-        padding: 35px 40px;
-        min-width: 250px;
+        border-radius: 20px;
+        padding: 30px 25px;
+        width: 100%;
         cursor: pointer;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         box-shadow: 0 8px 25px var(--shadow);
         animation: fade-in 1.6s ease-out;
+        text-decoration: none;
+        display: block;
       }
 
-      .card-button:hover {
-        transform: translateY(-10px) scale(1.05);
-        box-shadow:
-          0 15px 40px var(--shadow),
-          0 0 30px rgba(255, 158, 199, 0.5);
+      .card-button:active {
+        transform: scale(0.95);
       }
 
       .card-icon {
-        font-size: 3rem;
-        margin-bottom: 15px;
+        font-size: 2.5rem;
+        margin-bottom: 12px;
         display: block;
         animation: pulse-glow 2s infinite;
       }
 
       .card-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-weight: 600;
         color: var(--text-dark);
         margin-bottom: 8px;
@@ -223,6 +224,7 @@
       .card-desc {
         font-size: 0.9rem;
         color: var(--text-soft);
+        line-height: 1.4;
       }
 
       @keyframes pulse-glow {
@@ -248,248 +250,6 @@
         }
       }
 
-      /* ========== CONTENT SCREENS ========== */
-      .content-screen {
-        display: none;
-        animation: fade-in 0.6s ease-out;
-        text-align: center;
-        max-width: 800px;
-        width: 100%;
-      }
-
-      .content-screen.active {
-        display: block;
-      }
-
-      .back-button {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        background: var(--white);
-        border: none;
-        padding: 12px 25px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-family: "Quicksand", sans-serif;
-        font-weight: 600;
-        color: var(--text-dark);
-        box-shadow: 0 4px 15px var(--shadow);
-        transition: all 0.3s ease;
-        z-index: 100;
-      }
-
-      .back-button:hover {
-        transform: translateX(-5px);
-        box-shadow: 0 6px 20px var(--shadow);
-      }
-
-      /* ========== OPTION 1: CONFESSION ========== */
-      .tap-continue {
-        font-family: "Dancing Script", cursive;
-        font-size: 3rem;
-        color: var(--text-dark);
-        cursor: pointer;
-        animation:
-          fade-in 0.8s ease-out,
-          gentle-bounce 2s infinite;
-        padding: 40px;
-      }
-
-      @keyframes gentle-bounce {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-
-      .video-container {
-        display: none;
-        margin: 40px auto;
-        max-width: 700px;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow:
-          0 0 40px rgba(255, 158, 199, 0.6),
-          0 0 80px rgba(255, 158, 199, 0.3);
-        animation: fade-in 0.8s ease-out;
-      }
-
-      .video-container.active {
-        display: block;
-      }
-
-      .video-container video {
-        width: 100%;
-        display: block;
-      }
-
-      .final-message {
-        display: none;
-        font-family: "Dancing Script", cursive;
-        font-size: 2.5rem;
-        color: var(--text-dark);
-        margin-top: 40px;
-        animation: fade-in 1s ease-out;
-      }
-
-      .final-message.active {
-        display: block;
-      }
-
-      /* ========== OPTION 2: MISS YOU ========== */
-      .miss-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        cursor: pointer;
-      }
-
-      .miss-text {
-        font-size: 2rem;
-        color: var(--text-dark);
-        font-weight: 600;
-      }
-
-      .miss-visual {
-        display: none;
-        animation: scale-in 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .miss-visual.active {
-        display: block;
-      }
-
-      .miss-visual img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px var(--shadow);
-      }
-
-      .visual-small {
-        max-width: 150px;
-      }
-      .visual-medium {
-        max-width: 300px;
-      }
-      .visual-large {
-        max-width: 500px;
-      }
-
-      @keyframes scale-in {
-        from {
-          opacity: 0;
-          transform: scale(0.3);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      /* ========== OPTION 3: ENVELOPES ========== */
-      .envelope-container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      .envelope-button {
-        background: var(--white);
-        border: none;
-        padding: 25px 35px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-family: "Quicksand", sans-serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        box-shadow: 0 5px 20px var(--shadow);
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-      }
-
-      .envelope-button:hover {
-        transform: translateX(10px);
-        box-shadow: 0 8px 30px var(--shadow);
-      }
-
-      .envelope-icon {
-        font-size: 1.5rem;
-      }
-
-      /* ========== MODAL ========== */
-      .modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        align-items: center;
-        justify-content: center;
-        animation: fade-in 0.3s ease-out;
-      }
-
-      .modal-overlay.active {
-        display: flex;
-      }
-
-      .modal-content {
-        background: var(--white);
-        padding: 50px;
-        border-radius: 25px;
-        max-width: 600px;
-        width: 90%;
-        max-height: 80vh;
-        overflow-y: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-      }
-
-      .modal-close {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: none;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-        color: var(--text-soft);
-        transition: all 0.3s ease;
-      }
-
-      .modal-close:hover {
-        color: var(--text-dark);
-        transform: rotate(90deg);
-      }
-
-      .modal-title {
-        font-family: "Dancing Script", cursive;
-        font-size: 2.5rem;
-        color: var(--text-dark);
-        margin-bottom: 25px;
-      }
-
-      .modal-text {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: var(--text-soft);
-      }
-
       /* ========== SECRET MESSAGE ========== */
       .secret-overlay {
         display: none;
@@ -503,6 +263,7 @@
         align-items: center;
         justify-content: center;
         animation: fade-in 0.8s ease-out;
+        padding: 20px;
       }
 
       .secret-overlay.active {
@@ -511,12 +272,13 @@
 
       .secret-message {
         font-family: "Dancing Script", cursive;
-        font-size: 3.5rem;
+        font-size: 2rem;
         color: var(--white);
         text-align: center;
-        padding: 40px;
+        padding: 20px;
         animation: text-reveal 2s ease-out;
         text-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        line-height: 1.6;
       }
 
       @keyframes text-reveal {
@@ -532,28 +294,81 @@
 
       .secret-close {
         position: absolute;
-        top: 30px;
-        right: 30px;
+        top: 20px;
+        right: 20px;
         background: var(--white);
         border: none;
-        padding: 12px 25px;
-        border-radius: 30px;
+        padding: 10px 20px;
+        border-radius: 25px;
         cursor: pointer;
         font-family: "Quicksand", sans-serif;
         font-weight: 600;
         color: var(--pink-accent);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
+        font-size: 0.9rem;
       }
 
-      .secret-close:hover {
-        transform: scale(1.1);
+      .secret-close:active {
+        transform: scale(0.95);
       }
 
       /* ========== RESPONSIVE ========== */
-      @media (max-width: 768px) {
+      @media (min-width: 768px) {
         .main-title {
-          font-size: 2.2rem;
+          font-size: 3rem;
+        }
+
+        .main-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .card-container {
+          flex-direction: row;
+          flex-wrap: wrap;
+          max-width: 900px;
+        }
+
+        .card-button {
+          min-width: 250px;
+          flex: 1;
+          padding: 35px 40px;
+        }
+
+        .card-button:hover {
+          transform: translateY(-10px) scale(1.05);
+          box-shadow:
+            0 15px 40px var(--shadow),
+            0 0 30px rgba(255, 158, 199, 0.5);
+        }
+
+        .card-icon {
+          font-size: 3rem;
+        }
+
+        .card-title {
+          font-size: 1.3rem;
+        }
+
+        .secret-message {
+          font-size: 3.5rem;
+          padding: 40px;
+        }
+
+        .secret-close {
+          top: 30px;
+          right: 30px;
+          padding: 12px 25px;
+        }
+
+        .secret-close:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      @media (max-width: 360px) {
+        .main-title {
+          font-size: 2rem;
         }
 
         .main-subtitle {
@@ -561,36 +376,19 @@
         }
 
         .card-button {
-          min-width: 200px;
-          padding: 30px 25px;
+          padding: 25px 20px;
         }
 
         .card-icon {
-          font-size: 2.5rem;
+          font-size: 2rem;
         }
 
         .card-title {
           font-size: 1.1rem;
         }
 
-        .tap-continue {
-          font-size: 2rem;
-        }
-
-        .miss-text {
-          font-size: 1.5rem;
-        }
-
         .secret-message {
-          font-size: 2rem;
-        }
-
-        .modal-content {
-          padding: 35px;
-        }
-
-        .modal-title {
-          font-size: 2rem;
+          font-size: 1.6rem;
         }
       }
     </style>
@@ -613,185 +411,29 @@
 
     <div class="container">
       <!-- MAIN SCREEN -->
-      <div class="main-screen" id="mainScreen">
+      <div class="main-screen">
         <h1 class="main-title">I made something for you…</h1>
         <p class="main-subtitle">Choose what you want to open ❤️</p>
 
         <div class="card-container">
-          <button
-            class="card-button"
-            onclick="window.location.href = 'confession.html'"
-          >
+          <a href="confession.html" class="card-button">
             <span class="card-icon">💌</span>
             <div class="card-title">A Little Confession</div>
             <div class="card-desc">Something I've been wanting to tell you</div>
-          </button>
+          </a>
 
-          <button
-            class="card-button"
-            onclick="window.location.href = 'miss.html'"
-          >
+          <a href="miss.html" class="card-button">
             <span class="card-icon">🥺</span>
             <div class="card-title">How Much I Miss You</div>
             <div class="card-desc">You have no idea...</div>
-          </button>
+          </a>
 
-          <button
-            class="card-button"
-            onclick="window.location.href = 'whenyouneed.html'"
-          >
+          <a href="whenyouneed.html" class="card-button">
             <span class="card-icon">💖</span>
             <div class="card-title">Open When You Need Me</div>
             <div class="card-desc">Love letters for different moments</div>
-          </button>
+          </a>
         </div>
-      </div>
-
-      <!-- OPTION 1: CONFESSION -->
-      <div class="content-screen" id="option1">
-        <button class="back-button" onclick="goBack()">← Back</button>
-
-        <div
-          id="confessionStep1"
-          class="tap-continue"
-          onclick="nextConfessionStep(1)"
-        >
-          I want to tell you something…
-        </div>
-
-        <div
-          id="confessionStep2"
-          class="tap-continue"
-          style="display: none"
-          onclick="nextConfessionStep(2)"
-        >
-          It's something about you…
-        </div>
-
-        <div
-          id="confessionStep3"
-          class="tap-continue"
-          style="display: none"
-          onclick="nextConfessionStep(3)"
-        >
-          Okay… here it is.
-        </div>
-
-        <div class="video-container" id="videoContainer">
-          <video id="confessionVideo" controls autoplay>
-            <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-
-        <div class="final-message" id="finalMessage">
-          You're my favorite part of every day.
-        </div>
-      </div>
-
-      <!-- OPTION 2: MISS YOU -->
-      <div class="content-screen" id="option2">
-        <button class="back-button" onclick="goBack()">← Back</button>
-
-        <div class="miss-container" id="missContainer" onclick="nextMissStep()">
-          <div class="miss-text" id="missText">
-            This is how much I miss you…
-          </div>
-
-          <div class="miss-visual visual-small" id="missVisual1">
-            <div
-              style="
-                width: 150px;
-                height: 150px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 3rem;
-              "
-            >
-              🌙
-            </div>
-          </div>
-
-          <div class="miss-visual visual-medium" id="missVisual2">
-            <div
-              style="
-                width: 300px;
-                height: 300px;
-                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 5rem;
-              "
-            >
-              🌍
-            </div>
-          </div>
-
-          <div class="miss-visual visual-large" id="missVisual3">
-            <div
-              style="
-                width: 500px;
-                height: 500px;
-                max-width: 90vw;
-                max-height: 90vw;
-                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-                border-radius: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 8rem;
-              "
-            >
-              🌌
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- OPTION 3: ENVELOPES -->
-      <div class="content-screen" id="option3">
-        <button class="back-button" onclick="goBack()">← Back</button>
-
-        <div class="envelope-container">
-          <button class="envelope-button" onclick="openLetter(1)">
-            <span class="envelope-icon">💔</span>
-            <span>Open when you're sad</span>
-          </button>
-
-          <button class="envelope-button" onclick="openLetter(2)">
-            <span class="envelope-icon">😤</span>
-            <span>Open when you're mad at me</span>
-          </button>
-
-          <button class="envelope-button" onclick="openLetter(3)">
-            <span class="envelope-icon">🥹</span>
-            <span>Open when you miss me</span>
-          </button>
-
-          <button class="envelope-button" onclick="openLetter(4)">
-            <span class="envelope-icon">😴</span>
-            <span>Open when you can't sleep</span>
-          </button>
-
-          <button class="envelope-button" onclick="openLetter(5)">
-            <span class="envelope-icon">💭</span>
-            <span>Open when you doubt my love</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODAL FOR LETTERS -->
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal-content">
-        <button class="modal-close" onclick="closeModal()">×</button>
-        <h2 class="modal-title" id="modalTitle"></h2>
-        <p class="modal-text" id="modalText"></p>
       </div>
     </div>
 
@@ -806,134 +448,6 @@
     </div>
 
     <script>
-      // ========== NAVIGATION ==========
-      function showOption(num) {
-        document.getElementById("mainScreen").classList.remove("active");
-        document.getElementById("mainScreen").style.display = "none";
-        document.getElementById("option" + num).classList.add("active");
-
-        // Reset option 2 state
-        if (num === 2) {
-          missStep = 0;
-          document.getElementById("missText").textContent =
-            "This is how much I miss you…";
-          document.getElementById("missVisual1").classList.remove("active");
-          document.getElementById("missVisual2").classList.remove("active");
-          document.getElementById("missVisual3").classList.remove("active");
-        }
-
-        // Reset option 1 state
-        if (num === 1) {
-          confessionStep = 0;
-          document.getElementById("confessionStep1").style.display = "block";
-          document.getElementById("confessionStep2").style.display = "none";
-          document.getElementById("confessionStep3").style.display = "none";
-          document.getElementById("videoContainer").classList.remove("active");
-          document.getElementById("finalMessage").classList.remove("active");
-        }
-      }
-
-      function goBack() {
-        document.querySelectorAll(".content-screen").forEach((screen) => {
-          screen.classList.remove("active");
-          screen.style.display = "none";
-        });
-        document.getElementById("mainScreen").style.display = "block";
-        document.getElementById("mainScreen").classList.add("active");
-      }
-
-      // ========== OPTION 1: CONFESSION ==========
-      let confessionStep = 0;
-
-      function nextConfessionStep(current) {
-        confessionStep++;
-
-        if (current === 1) {
-          document.getElementById("confessionStep1").style.display = "none";
-          document.getElementById("confessionStep2").style.display = "block";
-        } else if (current === 2) {
-          document.getElementById("confessionStep2").style.display = "none";
-          document.getElementById("confessionStep3").style.display = "block";
-        } else if (current === 3) {
-          document.getElementById("confessionStep3").style.display = "none";
-          document.getElementById("videoContainer").classList.add("active");
-
-          // Show final message when video ends
-          const video = document.getElementById("confessionVideo");
-          video.addEventListener("ended", function () {
-            document.getElementById("finalMessage").classList.add("active");
-          });
-        }
-      }
-
-      // ========== OPTION 2: MISS YOU ==========
-      let missStep = 0;
-
-      function nextMissStep() {
-        missStep++;
-
-        if (missStep === 1) {
-          document.getElementById("missText").textContent = "A little bit…";
-          document.getElementById("missVisual1").classList.add("active");
-        } else if (missStep === 2) {
-          document.getElementById("missText").textContent = "Actually, a lot…";
-          document.getElementById("missVisual1").classList.remove("active");
-          document.getElementById("missVisual2").classList.add("active");
-        } else if (missStep === 3) {
-          document.getElementById("missText").textContent =
-            "More than the entire universe…";
-          document.getElementById("missVisual2").classList.remove("active");
-          document.getElementById("missVisual3").classList.add("active");
-        } else if (missStep === 4) {
-          document.getElementById("missText").textContent =
-            "I miss you more than words can ever explain.";
-        }
-      }
-
-      // ========== OPTION 3: LETTERS ==========
-      const letters = {
-        1: {
-          title: "When you're sad... 💔",
-          text: "Hey love, I know things are tough right now, but I want you to remember something: you are so much stronger than you think. Every challenge you've faced, you've overcome. And this time will be no different. I'm here for you, always. Your happiness means everything to me, and I promise we'll get through this together. You're not alone. I love you more than words can say. Things will get better, I promise. ❤️",
-        },
-        2: {
-          title: "When you're mad at me... 😤",
-          text: "I know I messed up, and I'm truly sorry. You mean the world to me, and the last thing I ever want to do is hurt you. Whatever I did, I didn't mean to upset you. Can we talk about it? I want to understand how you feel and make things right. You're too important to me to let anything come between us. I love you, and I'll do whatever it takes to fix this. Please forgive me. 💕",
-        },
-        3: {
-          title: "When you miss me... 🥹",
-          text: "I miss you too, so incredibly much. Every moment apart feels like forever. I think about you constantly—your smile, your laugh, the way you make everything better. Distance means nothing when someone means everything. Keep this close to your heart: no matter how far apart we are, you're always with me. I can't wait until we're together again. Until then, know that you're loved beyond measure. 💖",
-        },
-        4: {
-          title: "When you can't sleep... 😴",
-          text: "Close your eyes and imagine this: we're lying under the stars together, your head on my chest, listening to my heartbeat. The night is peaceful, and you're safe in my arms. I'm whispering sweet nothings to you, telling you how much you mean to me. Let that feeling wash over you. Let go of your worries. Tomorrow is a new day, and whatever it brings, we'll face it together. Sleep well, my love. Dream of us. I'll be dreaming of you. 🌙✨",
-        },
-        5: {
-          title: "When you doubt my love... 💭",
-          text: "Please don't ever doubt how much I love you. You are my everything—my first thought in the morning and my last at night. When I look at you, I see my future, my happiness, my home. I love every part of you: your kindness, your strength, your quirks, your flaws. All of it. I chose you, and I'll keep choosing you, every single day. You are irreplaceable, unforgettable, and deeply loved. Never forget that. I'm yours, completely and forever. 💖💍",
-        },
-      };
-
-      function openLetter(num) {
-        const letter = letters[num];
-        document.getElementById("modalTitle").textContent = letter.title;
-        document.getElementById("modalText").textContent = letter.text;
-        document.getElementById("modalOverlay").classList.add("active");
-      }
-
-      function closeModal() {
-        document.getElementById("modalOverlay").classList.remove("active");
-      }
-
-      // Close modal when clicking outside
-      document
-        .getElementById("modalOverlay")
-        .addEventListener("click", function (e) {
-          if (e.target === this) {
-            closeModal();
-          }
-        });
-
       // ========== SECRET STAR ==========
       document
         .getElementById("secretStar")
