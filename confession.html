@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>For You 💕</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap"
@@ -22,6 +25,7 @@
         overflow: hidden;
         cursor: pointer;
         user-select: none;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .hearts-background {
@@ -639,11 +643,99 @@
         background: rgba(0, 0, 0, 0.3);
       }
 
+      /* Mobile optimizations */
       @media (max-width: 600px) {
         .sound-toggle {
           width: 40px;
           height: 40px;
           font-size: 18px;
+        }
+
+        .scene-text {
+          font-size: clamp(20px, 8vw, 36px);
+          padding: 0 15px;
+        }
+
+        .video-container {
+          max-width: 95%;
+        }
+
+        .video-label {
+          font-size: clamp(18px, 6vw, 28px);
+          margin-bottom: 20px;
+        }
+
+        .video-label::before,
+        .video-label::after {
+          font-size: 16px;
+          left: -30px;
+        }
+
+        .video-label::after {
+          right: -30px;
+        }
+
+        .corner-hearts {
+          font-size: 24px;
+        }
+
+        .final-message {
+          font-size: clamp(16px, 5vw, 24px);
+          padding: 15px;
+          max-width: 90%;
+        }
+
+        .valentine-final {
+          font-size: clamp(18px, 6vw, 28px);
+          padding: 0 20px;
+        }
+
+        .ribbon {
+          display: none;
+        }
+
+        .stars {
+          font-size: 16px;
+        }
+
+        .sparkle {
+          width: 4px;
+          height: 4px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .scene-text {
+          font-size: clamp(18px, 7vw, 32px);
+        }
+
+        .video-label {
+          font-size: clamp(16px, 5vw, 24px);
+        }
+
+        .corner-hearts {
+          font-size: 20px;
+        }
+      }
+
+      /* Landscape orientation on mobile */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .scene-text {
+          font-size: clamp(16px, 5vw, 28px);
+        }
+
+        .video-label {
+          font-size: clamp(14px, 4vw, 22px);
+          margin-bottom: 10px;
+        }
+
+        .final-message {
+          font-size: clamp(14px, 3.5vw, 20px);
+          line-height: 1.5;
+        }
+
+        .valentine-final {
+          font-size: clamp(16px, 5vw, 24px);
         }
       }
     </style>
@@ -730,7 +822,7 @@
     <!-- Valentine's Day Message Scene -->
     <div class="scene" id="valentineMessage">
       <div class="scene-text valentine-final">
-        Valentine’s Day may be over…<br />
+        Valentine's Day may be over…<br />
         but my feelings for you never are. ❤️
       </div>
     </div>
@@ -772,14 +864,22 @@
 
       // Handle tap/click anywhere
       document.body.addEventListener("click", handleTap);
+      // Also handle touch events for better mobile support
+      document.body.addEventListener("touchend", handleTap);
 
       function handleTap(e) {
+        // Prevent double-firing on mobile
+        e.preventDefault();
+
         if (currentScene === 1) {
           transitionToScene2();
         } else if (currentScene === 2) {
           transitionToScene3();
         } else if (currentScene === "final") {
           showValentineMessage();
+        } else if (currentScene === "valentine") {
+          // Redirect to index.html when final scene is clicked
+          window.location.href = "index.html";
         }
       }
 
